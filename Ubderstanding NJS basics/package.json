@@ -1,0 +1,16 @@
+{
+  "name": "ubderstanding-njs-basics",
+  "version": "1.0.0",
+  "description": "Complete Node.js guide",
+  "main": "train.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node train.js",
+    "start-server": "node  train.js"
+  },
+  "author": "Ashraf Mohamed",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
