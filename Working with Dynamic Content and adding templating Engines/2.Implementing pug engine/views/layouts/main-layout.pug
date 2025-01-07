@@ -5,12 +5,13 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title #{pageTitle}
         link(rel="stylesheet", href="/css/main.css")
+        block links
     body 
         header.main-header
             nav.main-header__nav
                 ul.main-header__item-list
                     li.main-header__item
-                        a(href = "/users/shop") Shop
+                        a(href = "/users/shop" , class = (path === '/users/shop' ? 'active' : '')) Shop
                     li.main-header__item
-                        a(href = "/admin/add-product") Add Product
-        h1 Page Not found 404!!
+                        a(href = "/admin/add-product" , class = (path === '/admin/add-product' ? 'active' : '')) Add Product
+        block content

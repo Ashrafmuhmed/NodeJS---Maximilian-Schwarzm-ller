@@ -9,7 +9,8 @@ router.get(
         const products = adminData.products;
         res.render('shop' , {
             prods : products , 
-            docTitle : 'Shop'
+            docTitle : 'Shop' , 
+            path : '/users/shop'
         });
     }
 );
