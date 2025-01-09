@@ -9,18 +9,18 @@ const adminData = require('./routers/admin');
 const shopRoute = require('./routers/shop');
 
 
-app.engine('handlebars' , expressHbs()) ;
-app.set('view engine' , 'handlebars');
-app.set('views' , path.join(rootDir , 'views'));
+app.engine('handlebars', expressHbs({ layoutDir: 'views/layouts/', defaultLayout: 'main', extname: 'handlebars' }));;
+app.set('view engine', 'handlebars');
+app.set('views', path.join(rootDir, 'views'));
 
-app.use(express.static(path.join(rootDir , 'public')));
-app.use(bodyParser.urlencoded({extended : false}));
+app.use(express.static(path.join(rootDir, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/admin' , adminData.routers);
-app.use('/users' , shopRoute);
-app.use('/' , (req , res , next) => {
-    res.render('404' , {
-        pageTitle : 'Not found page'
+app.use('/admin', adminData.routers);
+app.use('/users', shopRoute);
+app.use('/', (req, res, next) => {
+    res.status(404).render('404', {
+        pageTitle: 'Not found page'
     });
 })
 

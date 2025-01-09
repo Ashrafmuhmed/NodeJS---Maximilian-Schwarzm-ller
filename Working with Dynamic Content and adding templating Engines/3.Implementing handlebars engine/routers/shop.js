@@ -11,7 +11,9 @@ router.get(
             prods : products , 
             docTitle : 'Shop' , 
             path : '/users/shop',
-            hasProducts : products.length > 0 ? true : false 
+            hasProducts : products.length > 0 ? true : false ,
+            productCSS : true , 
+            activeShop : true
         });
     }
 );
