@@ -17,7 +17,7 @@ exports.postAddProduct = (req ,res, next) => {
     res.redirect('/users/shop');
 };
 
-exports.getProducts = (req, res, next) => {
+exports.getShop = (req, res, next) => {
         Product.fetchAll(products => {
             res.render('shop/product-list' , {
             prods : products , 
@@ -27,5 +27,25 @@ exports.getProducts = (req, res, next) => {
             productCSS : true , 
             activeShop : true
         });
-        }) ; 
+        }); 
+}
+
+exports.getCart = (req , res , next) => {
+    res.render(
+        'shop/cart' , 
+        {
+            path : '/cart',
+            pageTitle : 'Cart'
+        }
+    )
+};
+
+exports.getProducts = (req , res , next) => {
+    res.render(
+        'shop/index.ejs' , 
+        {
+            pageTitle : 'Products' ,
+            path  : '/products'
+        }
+    )
 }
