@@ -30,7 +30,7 @@ exports.getIndex = (req , res , next) => {
             {
                 prods : products , 
             pageTitle : 'Main Page' , 
-            path : '/users/index',
+            path : '/users/shop',
             hasProducts : products.length > 0 ? true : false ,
             productCSS : true , 
             activeShop : true
