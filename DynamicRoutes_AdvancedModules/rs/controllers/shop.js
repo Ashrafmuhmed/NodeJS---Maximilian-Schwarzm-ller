@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 
-exports.getShop = (req, res, next) => {
+exports.getProducts = (req, res, next) => {
         Product.fetchAll(products => {
             res.render('shop/product-list' , {
             prods : products , 
@@ -11,6 +11,12 @@ exports.getShop = (req, res, next) => {
             activeShop : true
         });
         }); 
+}
+
+exports.getProduct = (req , res , next) => {
+    const prodId = req.params.productId ; 
+    console.log(prodId) ;
+    res.redirect('/users/');
 }
 
 exports.getCart = (req , res , next) => {

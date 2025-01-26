@@ -3,7 +3,7 @@ const router = express.Router();
 const productsController = require('../controllers/shop');
 
 router.get(
-    '/shop', productsController.getIndex
+    '/', productsController.getIndex
 );
 
 router.get(
@@ -11,8 +11,10 @@ router.get(
 );
 
 router.get(
-    '/products' , productsController.getShop  
+    '/products' , productsController.getProducts  
 );
+
+router.get('/products/:productId' , productsController.getProduct)
 
 router.get(
     '/checkout' , productsController.getCheckout
