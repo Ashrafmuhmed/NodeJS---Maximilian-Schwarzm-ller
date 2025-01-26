@@ -9,7 +9,7 @@ const getProductsFromFile = (cb) => {
         p, (err, data) => {
             if (!err) {
                 products = JSON.parse(data);
-                console.log('From fetching data', products);
+                // console.log('From fetching data', products);
                 cb(products);
             }
             else {
@@ -40,6 +40,15 @@ module.exports = class Product {
     
     static fetchAll(cb) {
         getProductsFromFile(cb);
+    }
+
+    static getProductById(id , cb){
+        getProductsFromFile(
+            products => {
+                const product = products.find(p => p.id == id);
+                cb(product);
+            }
+        )
     }
 };
 
