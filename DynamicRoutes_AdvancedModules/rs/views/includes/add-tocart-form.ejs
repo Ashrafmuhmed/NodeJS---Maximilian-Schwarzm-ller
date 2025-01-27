@@ -1,0 +1,9 @@
+<form action="/users/cart" method="post">
+    <button class="btn" type="submit">
+        Add to cart
+        <input type="hidden" value="<%= product.id %>" name="productId">
+        <input type="hidden" name="productTitle" value="<%= product.title %>">
+        <input type="hidden" name="productPrice" value="<%= product.price %>">
+
+    </button>
+</form>

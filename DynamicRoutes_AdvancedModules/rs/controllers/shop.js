@@ -25,6 +25,12 @@ exports.getProduct = (req , res , next) => {
     )
 }
 
+exports.postCart = (req , res , next) => {
+    const reqBody = req.body ;
+    console.log(reqBody.productId , reqBody.productTitle);
+    res.redirect('/users/cart');
+}
+
 exports.getCart = (req , res , next) => {
     res.render(
         'shop/cart' , 

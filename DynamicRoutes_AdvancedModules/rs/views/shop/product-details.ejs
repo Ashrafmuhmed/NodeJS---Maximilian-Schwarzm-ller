@@ -10,11 +10,9 @@
         </div>
         <h2><%= product.price %></h2>
         <p><%= product.description %></p>
-        <form action="" method="post">
-            <button class="btn" type="submit">
-                Add to cart
-            </button>
-        </form>
+        <%- include('../includes/add-tocart-form.ejs' , {
+            product : product
+        }) %>
     </main>
 
 <%- include('../includes/end.ejs') %>
