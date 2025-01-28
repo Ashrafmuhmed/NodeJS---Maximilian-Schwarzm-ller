@@ -23,7 +23,7 @@ const getProductsFromFile = (cb) => {
 module.exports = class Product {
     constructor(title , price , imageUrl , description ) {
         this.title = title;
-        this.price = price;
+        this.price = Number.parseInt(price);
         this.imageUrl = imageUrl ;
         this.description = description ;
     }
