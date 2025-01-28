@@ -13,19 +13,26 @@ exports.postAddProduct = (req, res, next) => {
     console.log(req.body.title);
     let reqBody = req.body;
     const product = new Product(reqBody.title, reqBody.price, reqBody.imageUrl, reqBody.description);
-    console.log('asdsadsd' , product) ;
+    console.log('asdsadsd', product);
     product.save();
     res.redirect('/users/shop');
 };
 
 
 exports.getEditProduct = (req, res, next) => {
-    res.render('admin/edit-product',
-        {
-            pageTitle: 'Edit Product',
-            path: '/admin/add-product',
-        });
-    console.log()
+    const productId = req.params.productId;
+    Product.getProductById(productId,
+        product => {
+            if(!product) res.redirect('/users')
+            res.render('admin/edit-product',
+                {
+                    pageTitle: 'Edit Product',
+                    path: '/admin/add-product',
+                    product: product
+                });
+        }
+    );
+
 
 }
 

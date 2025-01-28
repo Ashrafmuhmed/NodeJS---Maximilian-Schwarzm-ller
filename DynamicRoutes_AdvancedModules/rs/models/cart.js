@@ -30,7 +30,7 @@ module.exports = class Cart {
                 }
                 else{
                     updatedProduct = {
-                        id : id , qty : 10
+                        id : id , qty : 1
                     }
                     cart.products = [...cart.products , updatedProduct] ; 
                 }
