@@ -21,7 +21,8 @@ const getProductsFromFile = (cb) => {
 }
 
 module.exports = class Product {
-    constructor(title , price , imageUrl , description ) {
+    constructor(id ,title , price , imageUrl , description ) {
+        this.id = id ;
         this.title = title;
         this.price = Number.parseInt(price);
         this.imageUrl = imageUrl ;
@@ -30,8 +31,12 @@ module.exports = class Product {
 
     save() {
         getProductsFromFile(products => {
-            this.id = (products.length + 1).toString() ;
-            products.push(this);
+            if(this.id){
+                const editedProductIndex = products.findIndex( p => p.id == this.id) ;
+                products[editedProductIndex] = this ;
+            }else{
+                this.id = (products.length + 1).toString() ;
+                products.push(this);}
             fs.writeFile(p, JSON.stringify(products), (err) => {
                 console.log(err);
             })

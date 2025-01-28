@@ -12,7 +12,7 @@ exports.getAddProduct = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
     console.log(req.body.title);
     let reqBody = req.body;
-    const product = new Product(reqBody.title, reqBody.price, reqBody.imageUrl, reqBody.description);
+    const product = new Product( null , reqBody.title, reqBody.price, reqBody.imageUrl, reqBody.description);
     console.log('asdsadsd', product);
     product.save();
     res.redirect('/users/shop');
@@ -34,6 +34,14 @@ exports.getEditProduct = (req, res, next) => {
     );
 
 
+}
+
+exports.postEditProduct = (req , res , next) => {
+    const reqBody = req.body ;
+    const editedProduct = new Product( reqBody.id , reqBody.title , reqBody.price , reqBody.imageUrl , reqBody.description) ;
+    console.log(editedProduct) ;
+    editedProduct.save();
+    res.redirect('/users');
 }
 
 
