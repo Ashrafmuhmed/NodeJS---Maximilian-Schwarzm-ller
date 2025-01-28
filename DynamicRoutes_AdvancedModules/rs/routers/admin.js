@@ -25,7 +25,7 @@ router.post(
 )
 
 router.post(
-    '/delete-product/:productId' , adminController.deleteproduct
+    '/delete-product/:productId' , adminController.postDeleteproduct
 )
 
 module.exports = {

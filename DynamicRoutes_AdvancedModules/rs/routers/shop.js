@@ -6,6 +6,8 @@ router.get(
     '/', productsController.getIndex
 );
 
+router.post('/cart/remove-product/:productId' , productsController.postDeleteProductFromCart);
+
 router.get(
     '/cart' , productsController.getCart
 );

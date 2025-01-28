@@ -75,3 +75,9 @@ exports.getOrders = (req , res , next) => {
         pageTitle : 'Orders'
     });
 };
+
+exports.postDeleteProductFromCart = (req , res , next) => {
+    const productId = req.params.productId ; 
+    Product.getProductById( productId , product => Cart.deleteProduct(productId , product.price));
+    res.redirect('/users/');
+}

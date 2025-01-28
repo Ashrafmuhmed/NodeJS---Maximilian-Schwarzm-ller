@@ -1,5 +1,5 @@
 const Product = require('../models/product');
-
+const cart = require('../models/cart');
 
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/add-product',
@@ -58,8 +58,9 @@ exports.getProducts = (req, res, next) => {
     })
 }
 
-exports.deleteproduct = (req, res , next) => {
+exports.postDeleteproduct = (req, res , next) => {
     const productId = req.params.productId ;
     Product.deleteProduct(productId);
+    Product.getProductById( productId  , product => cart.deleteProduct(productId , product.price));
     res.redirect('/users');
 }
