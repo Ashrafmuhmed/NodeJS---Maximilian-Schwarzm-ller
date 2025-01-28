@@ -6,8 +6,6 @@ exports.getAddProduct = (req, res, next) => {
         {
             pageTitle: 'Add Product',
             path: '/admin/add-product',
-            formCSS: true,
-            activeAddProduct: true
         });
 }
 
@@ -19,6 +17,18 @@ exports.postAddProduct = (req, res, next) => {
     product.save();
     res.redirect('/users/shop');
 };
+
+
+exports.getEditProduct = (req, res, next) => {
+    res.render('admin/edit-product',
+        {
+            pageTitle: 'Edit Product',
+            path: '/admin/add-product',
+        });
+    console.log()
+
+}
+
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll(products => {
