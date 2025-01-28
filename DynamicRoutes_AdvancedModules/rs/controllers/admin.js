@@ -32,8 +32,6 @@ exports.getEditProduct = (req, res, next) => {
                 });
         }
     );
-
-
 }
 
 exports.postEditProduct = (req , res , next) => {
@@ -58,4 +56,10 @@ exports.getProducts = (req, res, next) => {
             }
         )
     })
+}
+
+exports.deleteproduct = (req, res , next) => {
+    const productId = req.params.productId ;
+    Product.deleteProduct(productId);
+    res.redirect('/users');
 }
