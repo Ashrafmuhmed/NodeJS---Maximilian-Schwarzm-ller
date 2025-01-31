@@ -58,6 +58,9 @@ module.exports = class Cart {
                 if(!err){
                     const cartProducts = JSON.parse(fileContent) ;
                     const product = cartProducts.products.find( p => p.id == id) ;
+                    console.log(
+                        'deleting product : ' , product 
+                    )
                     cartProducts.products = cartProducts.products.filter( p => p.id != id) ; 
                     cartProducts.totalPrice -= (productPrice * product.qty) ;
                     fs.writeFile( p , JSON.stringify(cartProducts) , err => console.log(err)) ;} 

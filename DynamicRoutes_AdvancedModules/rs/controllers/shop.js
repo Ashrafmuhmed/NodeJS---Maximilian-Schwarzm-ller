@@ -59,6 +59,11 @@ exports.getCart = (req, res, next) => {
     );
 };
 
+exports.postRemoveProductFromCart = (req , res , next) => {
+    Cart.deleteProduct( req.body.id , req.body.price ); 
+    res.redirect('/users/');
+}
+
 
 exports.getIndex = (req, res, next) => {
     Product.fetchAll(products => {

@@ -13,8 +13,13 @@ router.get(
 );
 
 router.post(
+    '/cart/remove' , productsController.postRemoveProductFromCart
+);
+
+router.post(
     '/cart' , productsController.postCart
 )
+
 
 router.get(
     '/products' , productsController.getProducts  
