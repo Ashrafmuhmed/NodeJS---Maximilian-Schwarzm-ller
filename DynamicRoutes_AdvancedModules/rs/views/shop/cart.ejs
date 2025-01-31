@@ -3,4 +3,19 @@
 
     <body>
         <%- include('../includes/navigation.ejs') %>
+        <main class="centered">
+            <% if(products.length > 0) { %>
+                <h1>Cart Content   total cost = <%=totalPrice%></h1>
+                <%products.forEach( product => { %>
+                <div>
+                    <h3>title : <%=product.productData.title%></h3>
+                    <h3>Price : <%=product.productData.price%></h3>
+                    <h3>Quantity : <%=product.qty%></h3>
+                    <button type="submit">Remove</button>
+                </div>
+                <% }) %>
+            <% } else { %>
+                <h1>No products Currently in the cart</h1>
+            <% } %>
+        </main>
         <%- include('../includes/end.ejs') %>
