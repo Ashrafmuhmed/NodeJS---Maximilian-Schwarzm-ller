@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main class="centered">
+            <% if(products.length > 0) { %>
+                <h1>Cart Content   total cost = <%=totalPrice%></h1>
+                <%products.forEach( product => { %>
+                <div>
+                    <h3>title : <%=product.productData.title%></h3>
+                    <h3>Price : <%=product.productData.price%></h3>
+                    <h3>Quantity : <%=product.qty%></h3>
+                    <form action="/users/cart/remove" method="post">
+                        <button type="submit">Remove</button>
+                        <input type="hidden" name="id" value="<%=product.productData.id%>">
+                        <input type="hidden" name="price" value="<%=product.productData.price%>">
+                    </form>
+                </div>
+                <% }) %>
+            <% } else { %>
+                <h1>No products Currently in the cart</h1>
+            <% } %>
+        </main>
+        <%- include('../includes/end.ejs') %>
