@@ -1,24 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-const rootDir = require('../utils/path');
-const p = path.join(rootDir, 'data', 'products.json');
+const database = require('../utils/database');
 
-const getProductsFromFile = (cb) => {
-    let products = [];
-    fs.readFile(
-        p, (err, data) => {
-            if (!err) {
-                products = JSON.parse(data);
-                // console.log('From fetching data', products);
-                cb(products);
-            }
-            else {
-                console.log(err);
-                cb(products);
-            }
-        }
-    )
-}
 
 module.exports = class Product {
     constructor(id ,title , price , imageUrl , description ) {
@@ -30,43 +11,22 @@ module.exports = class Product {
     }
 
     save() {
-        getProductsFromFile(products => {
-            if(this.id){
-                const editedProductIndex = products.findIndex( p => p.id == this.id) ;
-                products[editedProductIndex] = this ;
-            }else{
-                this.id = (products[products.length - 1].id + 1).toString() ;
-                products.push(this);}
-            fs.writeFile(p, JSON.stringify(products), (err) => {
-                console.log(err);
-            })
-        })
+        return database.execute(
+            "INSERT INTO products (title , price , description , imageUrl) VALUE ( ? , ? , ? , ? )",
+            [this.title , this.price , this.description , this.imageUrl]
+        )
     }
     
-    static fetchAll(cb) {
-        getProductsFromFile(cb);
+    static fetchAll() {
+        return database.execute('SELECT * FROM products');
     }
 
-    static getProductById(id , cb){
-        getProductsFromFile(
-            products => {
-                const product = products.find(p => p.id == id);
-                cb(product);
-            }
-        )
+    static getProductById(id){
+        return database.execute(`SELECT * FROM products WHERE id = ${id}`)
     }
 
     static deleteProduct( id){
-        getProductsFromFile(
-            products => {
-                const updatedProducts = products.filter(p => p.id != id);
-                fs.writeFile(p , JSON.stringify(updatedProducts) , err => {
-                    if(err){
-                        console.log(err);
-                    }
-                })
-            }
-        )
+        
     }
 };
 

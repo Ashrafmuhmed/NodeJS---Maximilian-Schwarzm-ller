@@ -1,28 +1,36 @@
 const Product = require('../models/product');
 const Cart = require('../models/cart');
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll(products => {
-        res.render('shop/product-list', {
-            prods: products,
-            pageTitle: 'Shop',
-            path: '/products',
-            hasProducts: products.length > 0 ? true : false,
-            productCSS: true,
-            activeShop: true
-        });
-    });
+    Product.fetchAll().then(
+        ([products , fieldsData]) => {
+            res.render('shop/product-list', {
+                prods: products,
+                pageTitle: 'Shop',
+                path: '/products',
+                hasProducts: products.length > 0 ? true : false,
+                productCSS: true,
+                activeShop: true
+            });
+        }
+    ).catch(
+        err => console.log(err) 
+    );
+    
 }
 
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
     console.log(prodId);
-    Product.getProductById(prodId,
-        product => res.render('shop/product-details', {
-            product: product,
-            pageTitle: product.title,
-            path: '/products'
-        })
+    Product.getProductById(prodId).then(
+        ([product , fieldsData]) => {
+            res.render('shop/product-details', {
+                product: product[0],
+                pageTitle: product.title,
+                path: '/products'
+            })
+        } 
     )
+
 }
 
 exports.postCart = (req, res, next) => {
@@ -66,18 +74,22 @@ exports.postRemoveProductFromCart = (req , res , next) => {
 
 
 exports.getIndex = (req, res, next) => {
-    Product.fetchAll(products => {
-        res.render('shop/index',
-            {
-                prods: products,
-                pageTitle: 'Main Page',
-                path: '/users/shop',
-                hasProducts: products.length > 0 ? true : false,
-                productCSS: true,
-                activeShop: true
-            }
-        )
-    })
+    Product.fetchAll().then(
+        ([products , fieldsData]) => {
+            res.render('shop/index',
+                {
+                    prods: products,
+                    pageTitle: 'Main Page',
+                    path: '/users/shop',
+                    hasProducts: products.length > 0 ? true : false,
+                    productCSS: true,
+                    activeShop: true
+                }
+            )
+        }
+    ).catch(
+        err => console.log(err)
+    )
 };
 
 exports.getCheckout = (req, res, next) => {

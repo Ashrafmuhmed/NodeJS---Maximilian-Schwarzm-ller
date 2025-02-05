@@ -44,18 +44,22 @@ exports.postEditProduct = (req , res , next) => {
 
 
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll(products => {
-        res.render('admin/products',
-            {
-                prods: products,
-                pageTitle: 'Admin Products',
-                path: '/admin/products',
-                hasProducts: products.length > 0 ? true : false,
-                productCSS: true,
-                activeShop: true
-            }
-        )
-    })
+    Product.fetchAll().then(
+        ([products , fieldData]) => {
+            res.render('admin/products',
+                {
+                    prods: products,
+                    pageTitle: 'Admin Products',
+                    path: '/admin/products',
+                    hasProducts: products.length > 0 ? true : false,
+                    productCSS: true,
+                    activeShop: true
+                }
+            )
+        }
+    ).catch(
+        err => console.log(err)
+    )
 }
 
 exports.postDeleteproduct = (req, res , next) => {
